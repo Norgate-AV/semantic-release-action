@@ -28,7 +28,7 @@ const release = async () => {
 
   const semanticRelease = await import("semantic-release");
   const result = await semanticRelease.default({
-    // ...handleBranchesOption(),
+    ...handleBranchesOption(),
     ...handleDryRunOption(),
     ...handleCiOption(),
     ...handleExtends(),
