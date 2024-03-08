@@ -1,7 +1,7 @@
-const core = require("@actions/core");
+const core = require('@actions/core');
 const stringToJson =
-  require("@cycjimmy/awesome-js-funcs/cjs/typeConversion/stringToJson.cjs").default;
-const inputs = require("./inputs.json");
+  require('@cycjimmy/awesome-js-funcs/cjs/typeConversion/stringToJson.cjs').default;
+const inputs = require('./inputs.json');
 
 /**
  * Handle Branches Option
@@ -15,8 +15,8 @@ exports.handleBranchesOption = () => {
   core.debug(`branches input: ${branches}`);
   core.debug(`branch input: ${branch}`);
 
-  const semanticVersion = require("semantic-release/package.json").version;
-  const semanticMajorVersion = Number(semanticVersion.replace(/\..+/g, ""));
+  const semanticVersion = require('semantic-release/package.json').version;
+  const semanticMajorVersion = Number(semanticVersion.replace(/\..+/g, ''));
   core.debug(`semanticMajorVersion: ${semanticMajorVersion}`);
 
   // older than v16
@@ -34,7 +34,7 @@ exports.handleBranchesOption = () => {
   }
 
   // above v16
-  const strNeedConvertToJson = branches || branch || "";
+  const strNeedConvertToJson = branches || branch || '';
   core.debug(`strNeedConvertToJson: ${strNeedConvertToJson}`);
 
   if (!strNeedConvertToJson) {
@@ -44,7 +44,7 @@ exports.handleBranchesOption = () => {
     return branchesOption;
   }
 
-  const jsonOrStr = stringToJson("" + strNeedConvertToJson);
+  const jsonOrStr = stringToJson('' + strNeedConvertToJson);
   core.debug(`Converted branches attribute: ${JSON.stringify(jsonOrStr)}`);
   branchesOption.branches = jsonOrStr;
   return branchesOption;
@@ -59,10 +59,10 @@ exports.handleDryRunOption = () => {
   core.debug(`dryRun input: ${dryRun}`);
 
   switch (dryRun) {
-    case "true":
+    case 'true':
       return { dryRun: true };
 
-    case "false":
+    case 'false':
       return { dryRun: false };
 
     default:
@@ -79,10 +79,10 @@ exports.handleCiOption = () => {
   core.debug(`ci input: ${ci}`);
 
   switch (ci) {
-    case "true":
+    case 'true':
       return { ci: true, noCi: false };
 
-    case "false":
+    case 'false':
       return { ci: false, noCi: true };
 
     default:
@@ -101,7 +101,7 @@ exports.handleExtends = () => {
   if (extend) {
     const extendModuleNames = extend
       .split(/\r?\n/)
-      .map((name) => name.replace(/(?<!^)@.+/, ""));
+      .map((name) => name.replace(/(?<!^)@.+/, ''));
     return {
       extends: extendModuleNames,
     };
